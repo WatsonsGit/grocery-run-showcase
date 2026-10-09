@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* Fontsource face imports (weights used across the app, per Happy Hour's
+   BRAND.md section 4) */
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/400-italic.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/source-sans-3/400.css";
+@import "@fontsource/source-sans-3/500.css";
+@import "@fontsource/source-sans-3/600.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/700.css";
+
+/*
+  Brand tokens. Source of truth: Happy Hour Finance docs/BRAND.md section 3-4.
+  Tailwind v4 is CSS-first: anything under @theme with the --color-* / --font-*
+  namespace auto-generates utilities (bg-ember, text-ink, font-serif, etc.).
+  No tailwind.config.ts — Tailwind v4 does not generate that file.
+*/
+@theme {
+  --color-paper:       #F5EFE6;
+  --color-paper-deep:  #EDE3D2;
+  --color-ember:       #C8472A;
+  --color-ember-soft:  #E07355;
+  --color-gold:        #D4A04A;
+  --color-gold-soft:   #E5BD78;
+  --color-ink:         #2A2520;
+  --color-ink-soft:    #5A4F44;
+  --color-gray-soft:   #A39791;
+  --color-hairline:    #D7CFC2;
+  --color-cherry:      #A03524;
+  --color-leaf:        #5F7A3B;
+
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans:  "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  /* Safe-area inset tokens — auto-generate pt-safe-top, pb-safe-bottom,
+     pl-safe-left, pr-safe-right utilities under Tailwind v4. Needed for
+     iPhone Dynamic Island, home indicator, and landscape side insets. */
+  --spacing-safe-top:    env(safe-area-inset-top);
+  --spacing-safe-bottom: env(safe-area-inset-bottom);
+  --spacing-safe-left:   env(safe-area-inset-left);
+  --spacing-safe-right:  env(safe-area-inset-right);
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* iOS Safari auto-zooms when an input has font-size < 16px on focus.
+   Force min 16px on all form fields to prevent the zoom jolt. */
+@layer base {
+  input, textarea, select {
+    font-size: max(16px, 1rem);
+  }
+
+  /* Brand-consistent focus ring on every interactive element when
+     focused via keyboard (not mouse click). Accessibility hygiene. */
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+}
+
+/* Skip-to-content link: visually hidden until keyboard-focused, then
+   pops above everything. Lets keyboard / voiceover users bypass to the
+   page content. */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--color-ember);
+  color: var(--color-paper);
+  font-weight: 600;
+  border-radius: 8px;
+  transform: translateY(-200%);
+  transition: transform 150ms ease-out;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: none;
+}
+
+/* Small uppercase brand label (Source Sans, ember, tracked) — BRAND.md section 6 */
+.brand-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+}
+
+/* One gentle, staggered reveal on load — enough to feel considered, not showy.
+   The header leads; the list follows a beat later. Honors reduced-motion. */
+@keyframes gr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.gr-rise {
+  animation: gr-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.gr-rise-delay {
+  animation: gr-rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gr-rise,
+  .gr-rise-delay {
+    animation: none;
+  }
+}

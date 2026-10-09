@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Grocery Run">
+  <!-- Master app icon. Full-bleed & opaque: iOS masks the corners itself and
+       fills any transparency with black, so we ship a solid square. The bag is
+       kept within the central ~82% so an Android maskable (circle/squircle)
+       crop stays clean. Brand palette only: ember/cherry gradient, cream
+       paper, gold band. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#E4744F"/>
+      <stop offset="0.52" stop-color="#C8472A"/>
+      <stop offset="1" stop-color="#9E3421"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBF7F0"/>
+      <stop offset="1" stop-color="#EFE4D2"/>
+    </linearGradient>
+    <clipPath id="bagClip">
+      <path d="M150 214 h212 a14 14 0 0 1 13.9 15.7 l-19 152 a48 48 0 0 1 -47.7 42.3 H202.8 a48 48 0 0 1 -47.7 -42.3 l-19 -152 A14 14 0 0 1 150 214 Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- soft grounding shadow -->
+  <ellipse cx="256" cy="418" rx="120" ry="20" fill="#6f2415" opacity="0.33"/>
+
+  <!-- handle: open cream loop rising from the rim -->
+  <path d="M198 216 v-16 a58 58 0 0 1 116 0 v16" fill="none"
+        stroke="#FBF7F0" stroke-width="21" stroke-linecap="round"/>
+
+  <!-- bag body -->
+  <path d="M150 214 h212 a14 14 0 0 1 13.9 15.7 l-19 152 a48 48 0 0 1 -47.7 42.3 H202.8 a48 48 0 0 1 -47.7 -42.3 l-19 -152 A14 14 0 0 1 150 214 Z"
+        fill="url(#paper)"/>
+
+  <!-- gold band + a faint seam, clipped to the bag -->
+  <g clip-path="url(#bagClip)">
+    <rect x="130" y="286" width="252" height="30" fill="#D4A04A"/>
+    <rect x="130" y="330" width="252" height="8" fill="#C8472A" opacity="0.22"/>
+  </g>
+
+  <!-- top rim highlight -->
+  <path d="M158 220 h196" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+</svg>
