@@ -26,7 +26,3 @@ npm run dev
 ```
 
 Then open http://localhost:3000.
-
----
-
-Questions about how it was built: [support@edenvillelabs.com](mailto:support@edenvillelabs.com).
